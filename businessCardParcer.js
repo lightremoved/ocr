@@ -3,7 +3,7 @@
 *
 * Expected Input: String with new lines as delimiter.
 * 
-* Email address: Extracted using Validate.js
+* Email address: Extracted using Approve.js
 * Phone number: Extracted using LibPhonenumber.js to check for U.S. and international numbers.
 * Name: Extracted using Dice Coefficient Algorithm to compute similarity of strings and email address. Note, my
 * other solution for extracting names included using a RESTful nameAPI that returned the likiness of a string
