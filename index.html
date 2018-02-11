@@ -1,15 +1,14 @@
-<!-- index.html -->
     <!DOCTYPE html>
 
-    <!-- define angular app -->
+    <!-- Define Angular App -->
     <html ng-app="ocrApp">
     <head>
-      <!-- SPELLS -->
+      
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
       
         
-      <!-- load angular via CDN -->
+      <!-- Load Up Scripts -->
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.0.17/libphonenumber-js.min.js"></script>
@@ -22,14 +21,12 @@
       <script src="businessCardParcer.js"></script>
     </head>
 
-    <!-- define angular controller -->
+    <!-- Define Angular controller -->
     <body ng-controller="mainController">
 
-    <!-- MAIN CONTENT AND INJECTED VIEWS -->
+    <!-- MAIN CONTENT -->
     <div id="main">
-        
-        
-        <div id="header" class="row">
+        <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <h1 class="display-4" style="text-align:center;">Parse Component</h1>
@@ -37,18 +34,17 @@
             </div>
             <div class="col-md-4"></div>
         </div>
-        
         <div class="container-fluid">
             <div class="row" style="padding-top: 20px;">
                 <div class="col-md-4">
                     <div>
                         <h5 style="text-align: center;">Directions:</h5>
                     </div>
-                    <div>
-                        <p>Paste an example input into the text area to the right, then click "Test Parser." The expected outcome is for the name, phone, and email address to be parsed out.</p>
+                    <div style="font-size: 12px;">
+                        <p>Copy and paste an example input (below) into the text area to the right, then click "Test Parser." The expected outcome is for the name, phone, and email address to be extracted.</p>
                     </div>
                     <div>
-                        <div>
+                        <div style="font-size: 12px;">
                             <b>Example documents to try:</b>
                         </div>
                         <p style="padding-top: 10px;font-size: 12px;">
@@ -84,10 +80,11 @@
                 </div>
                 <div class="col-md-4">
                     <div style="text-align: center;">
-                        <textarea style="width:400px;height:400px;" ng-model="testInput"></textarea>
+                        <textarea style="width:400px;height:400px;" ng-model="docInput"></textarea>
                     </div>
                     <div style="text-align: center;">
                         <button type="button" class="btn btn-secondary btn-lg" ng-click="submit()">Test Parser</button>
+                        <button type="button" class="btn btn-secondary btn-lg" ng-click="init()">Clear</button>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -98,10 +95,6 @@
                 </div>
             </div>
         </div>
-        
-        
-        
-        
     </div>
-        </body>
+  </body>
 </html>
