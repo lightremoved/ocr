@@ -3,7 +3,11 @@ Programming challenge
 
 ## Getting Started
 
-To test, copy down the files included in this repo. Make sure all files are in the same folder once downloaded. Open the index.html file in Chrome or Firefox and you are ready to test. Follow the directions once on the index page. 
+* Download the project as a zip file using the green "Clone or Download" button above.
+* Unzip the download.
+* Create a new folder/directory named "OCR" somewhere outside of the extracted folder; for example, in your Documents, Desktop, or Downloads folder.
+* Copy the files within the unzipped download to this new "OCR" folder.
+* Finally, open the index.html file in Chrome of Firefox. You are now ready to test!
 
 ### Prerequisites
 
