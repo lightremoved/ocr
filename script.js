@@ -84,9 +84,15 @@
         };
         
         $scope.submit = () => {
-            
+            $scope.results = {phone: "", name: "", email: ""};
+            let parcer = new BusinessCardParcer();
+            let contactInfo = parcer.getContactInfo($scope.testInput);
+            $scope.results.name = contactInfo.getName();
+            $scope.results.phone = contactInfo.getPhoneNumber();
+            $scope.results.email = contactInfo.getEmailAddress();
             // Reset anything left over from a previous click
-            $scope.possibleNumbers = [];
+            
+            /*$scope.possibleNumbers = [];
             $scope.results = {phone: "", name: "", email: ""};
             
             // Split and trim document into an array
@@ -107,7 +113,7 @@
             let percentages = calculateSimilarity(arr);
             
             // Set the name equal to the percentage with the highest value
-            $scope.results.name = percentages[0].input; 
+            $scope.results.name = percentages[0].input;*/
         };
         
     });
