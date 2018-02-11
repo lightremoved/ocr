@@ -45,9 +45,6 @@
                 
                 <!--Directions-->
                 <div class="col-md-4">
-                    <div>
-                        <h5 style="text-align: center;">Directions:</h5>
-                    </div>
                     <div style="font-size: 12px;">
                         <p>Copy and paste an example input (below) into the text area to the right, then click "Test Parser." The  name, phone, and email should be extracted from the input and displayed under results.</p>
                     </div>
@@ -92,7 +89,7 @@
                 <!-- Input and Button Actions -->
                 <div class="col-md-4">
                     <div style="text-align: center;">
-                        <textarea style="width:400px;height:400px;" ng-model="docInput"></textarea>
+                        <textarea style="width:100%;height:400px;" ng-model="docInput"></textarea>
                     </div>
                     <div style="text-align: center;">
                         <button type="button" class="btn btn-secondary btn-lg" ng-click="submit()">Test Parser</button>
@@ -102,10 +99,11 @@
 
                 <!-- Results -->
                 <div class="col-md-4">
-                    <h4 class="display-5">Results</h4>
-                    <div><label>Name: </label> {{results.name}}</div>
-                    <div><label>Phone: </label> {{results.phone}}</div>
-                    <div><label>Email: </label> {{results.email}}</div>
+                    <div>
+                        <div><b>Name: </b> {{results.name}}</div>
+                        <div><b>Phone: </b> {{results.phone}}</div>
+                        <div><b>Email: </b> {{results.email}}</div>
+                    </div>
                 </div>
             </div>
         </div>
