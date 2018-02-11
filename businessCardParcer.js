@@ -57,6 +57,8 @@ class BusinessCardParcer {
     selectSinglePhoneNumber() {
         if(this.possibleNumbers.length === 1) { // There is only one phone number match
             this.results.phone = this.possibleNumbers[0].formatted;
+        } else if(this.possibleNumbers.length === 0) {
+            this.results.phone = "";  
         } else {
             this.possibleNumbers.filter((val) => {return !(val.raw.indexOf('F') > -1 || val.raw.indexOf('f') > -1)});
             this.results.phone = this.possibleNumbers[0].formatted; // Assuming only two numbers were submitted
@@ -72,7 +74,11 @@ class BusinessCardParcer {
         });
             
         //Return the percentages sorted with highest being first
-        return percentages.sort((a,b) => {return b.percent - a.percent});
+        if(percentages.length > 0) {
+            return percentages.sort((a,b) => {return b.percent - a.percent});    
+        } else {
+            return [{input: ""}];
+        }
     }
        
         
@@ -99,30 +105,62 @@ class BusinessCardParcer {
         return (2.0 * intersection) / (length1 + length2);  
     }
     
-    // The main execution path for this class.
+    // Before returning results, make sure the result exists and is not empty
+    validateResults() {
+        for(let key in this.results) {
+            if(!this.results[key] || this.results[key] === "") {
+                this.results[key] = "Not Available";
+            }
+        }
+    }
+    
+    // Minimal input check for existence and new line delimited
+    isValidDocument(doc) {
+        if(doc) {
+            if(doc.split("\n").length > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    // The main execution path.
     getContactInfo(document) {
         
-        // Split and trim document into an array
-        let arr = document.split("\n").map((item) => {
-            return item.trim();
-        });
+        // Check for a valid new line delimited string
+        if(this.isValidDocument(document)) {
         
-        // Figure out the phone number(s) and remove it/them from array trimmed array
-        arr = arr.filter((val) => { return !this.isPhoneNumber(val); });
+            // Split and trim document into an array
+            let arr = document.split("\n").map((item) => {
+                return item.trim();
+            });
         
-        // If you have multiple telephone numbers, attempt to eliminate a fax number.
-        this.selectSinglePhoneNumber();
+            // Figure out the phone number(s) and remove it/them from array trimmed array
+            arr = arr.filter((val) => { return !this.isPhoneNumber(val); });
         
-        // Figure out email address(es) and remove it/them from array
-        arr = arr.filter((val) => {return !this.isEmailAdddress(val); });
+            // If you have multiple telephone numbers, attempt to eliminate a fax number.
+            this.selectSinglePhoneNumber();
         
-         // Calculate the percentage of similarity between email and remaining strings in array
-        let percentages = this.calculateSimilarity(arr);
+            // Figure out email address(es) and remove it/them from array
+            arr = arr.filter((val) => {return !this.isEmailAdddress(val); });
         
-        // Set the name to the highest percentage of match
-        this.results.name = percentages[0].input;
+            // Calculate the percentage of similarity between email and remaining strings in array
+            let percentages = this.calculateSimilarity(arr);
         
-        return new ContactInfo(this.results.name, this.results.phone, this.results.email);
+            // Set the name to the highest percentage of match
+            this.results.name = percentages[0].input;
+        
+            // Make sure results exist and are not empty
+            this.validateResults();
+        
+            return new ContactInfo(this.results.name, this.results.phone, this.results.email);
+        } else {
+            let message = "Invalid input."
+            return new ContactInfo(message, message, message);
+        }
     }
     
 }
