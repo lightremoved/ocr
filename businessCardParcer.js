@@ -60,7 +60,7 @@ class BusinessCardParcer {
         } else if(this.possibleNumbers.length === 0) { // No phone numbers
             this.results.phone = "";  
         } else { // Filter out any phone option that potentially has something fax related in the string
-            this.possibleNumbers.filter((val) => {return !(val.raw.indexOf('F') > -1 || val.raw.indexOf('f') > -1)});
+            this.possibleNumbers = this.possibleNumbers.filter((val) => {return (val.raw.indexOf('F') === -1 && val.raw.indexOf('f') === -1)});
             this.results.phone = this.possibleNumbers[0].formatted; // Assuming only two numbers were submitted
         }
     }
