@@ -14,7 +14,7 @@
 class BusinessCardParcer {
     
     // possibleNumbers: Array to hold any potential phone number matches
-    // results: The results of the processing
+    // results: The results of this processor
     constructor() {
         this.possibleNumbers = [];
         this.results = {phone: "", name: "", email: ""};
@@ -30,7 +30,7 @@ class BusinessCardParcer {
         }
     }
     
-    // Check if a string (docElement) is a possible phone number.
+    // Check if a string is a possible phone number.
     isPhoneNumber(docElement) {
         let usPhone = new libphonenumber.parse(docElement.replace(/\D/g,''), 'US').phone;
         if(usPhone) { // Check for US phone number
@@ -57,9 +57,9 @@ class BusinessCardParcer {
     selectSinglePhoneNumber() {
         if(this.possibleNumbers.length === 1) { // There is only one phone number match
             this.results.phone = this.possibleNumbers[0].formatted;
-        } else if(this.possibleNumbers.length === 0) {
+        } else if(this.possibleNumbers.length === 0) { // No phone numbers
             this.results.phone = "";  
-        } else {
+        } else { // Filter out any phone option that potentially has something fax related in the string
             this.possibleNumbers.filter((val) => {return !(val.raw.indexOf('F') > -1 || val.raw.indexOf('f') > -1)});
             this.results.phone = this.possibleNumbers[0].formatted; // Assuming only two numbers were submitted
         }
@@ -67,16 +67,24 @@ class BusinessCardParcer {
     
     // Determine how similar an email address is to an array of strings
     calculateSimilarity(arr) {
-        let percentages = [];
-        _.each(arr, (element) => {
-            let percent = this.calculateDice(element, this.results.email);
-            percentages.push({input: element, percent: percent});
-        });
+        
+        // Check if there is an email address to compare strings against
+        if(this.results.email && this.results.email !== "") {
             
-        //Return the percentages sorted with highest being first
-        if(percentages.length > 0) {
-            return percentages.sort((a,b) => {return b.percent - a.percent});    
-        } else {
+            // If so, calculate the percentages of similarity
+            let percentages = [];
+            _.each(arr, (element) => {
+                let percent = this.calculateDice(element, this.results.email);
+                percentages.push({input: element, percent: percent});
+            });
+            
+            //Return the percentages sorted with highest being first
+            if(percentages.length > 0) {
+                return percentages.sort((a,b) => {return b.percent - a.percent});    
+            } else {
+                return [{input: ""}];
+            }
+        } else { // There was no email supplied, return an empty result
             return [{input: ""}];
         }
     }
@@ -105,7 +113,7 @@ class BusinessCardParcer {
         return (2.0 * intersection) / (length1 + length2);  
     }
     
-    // Before returning results, make sure the result exists and is not empty
+    // Before returning results, make sure the result exists and are not empty
     validateResults() {
         for(let key in this.results) {
             if(!this.results[key] || this.results[key] === "") {

@@ -3,7 +3,7 @@ Programming challenge
 
 ## Getting Started
 
-To test, copy down the files included in this repo. Make sure they are all in the same folder once downloaded. Open the index.html file in Chrome or Firefox and you are ready to go. 
+To test, copy down the files included in this repo. Make sure all files are in the same folder once downloaded. Open the index.html file in Chrome or Firefox and you are ready to test. Follow the directions once on the index page. 
 
 ### Prerequisites
 

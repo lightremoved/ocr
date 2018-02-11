@@ -1,6 +1,6 @@
 
    /*
-    * A simple angular controller to handle user interaction as a means to test the Business Card Parcer
+    * A simple angular controller to handle user interaction in order to test the Business Card Parcer
     */
     var ocrApp = angular.module('ocrApp', []);
     ocrApp.controller('mainController', function($scope) {
