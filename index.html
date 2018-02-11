@@ -26,6 +26,8 @@
 
     <!-- MAIN CONTENT -->
     <div id="main">
+        
+        <!-- Header Content -->
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
@@ -34,14 +36,18 @@
             </div>
             <div class="col-md-4"></div>
         </div>
+        
+        <!--Main Container -->
         <div class="container-fluid">
             <div class="row" style="padding-top: 20px;">
+                
+                <!--Directions-->
                 <div class="col-md-4">
                     <div>
                         <h5 style="text-align: center;">Directions:</h5>
                     </div>
                     <div style="font-size: 12px;">
-                        <p>Copy and paste an example input (below) into the text area to the right, then click "Test Parser." The expected outcome is for the name, phone, and email address to be extracted.</p>
+                        <p>Copy and paste an example input (below) into the text area to the right, then click "Test Parser." The  name, phone, and email should be extracted from the input and displayed under results.</p>
                     </div>
                     <div>
                         <div style="font-size: 12px;">
@@ -78,6 +84,8 @@
                         </p>
                     </div>
                 </div>
+
+                <!-- Input and Button Actions -->
                 <div class="col-md-4">
                     <div style="text-align: center;">
                         <textarea style="width:400px;height:400px;" ng-model="docInput"></textarea>
@@ -87,6 +95,8 @@
                         <button type="button" class="btn btn-secondary btn-lg" ng-click="init()">Clear</button>
                     </div>
                 </div>
+
+                <!-- Results -->
                 <div class="col-md-4">
                     <h4 class="display-5">Results</h4>
                     <div><label>Name: </label> {{results.name}}</div>

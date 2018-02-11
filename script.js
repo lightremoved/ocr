@@ -1,4 +1,7 @@
 
+   /*
+    * A simple angular controller to handle user interaction as a means to test the Business Card Parcer
+    */
     var ocrApp = angular.module('ocrApp', []);
     ocrApp.controller('mainController', function($scope) {
     
@@ -12,7 +15,7 @@
             $scope.results.email = contactInfo.getEmailAddress();
         };
         
-        // Init and clear text area and results
+        // Initialize and clear text area and results
         $scope.init = () => {
             $scope.results = {phone: "", name: "", email: ""};
             $scope.docInput = "";
